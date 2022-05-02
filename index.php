@@ -11,12 +11,17 @@
 <body>
 
     <?php
-        require_once "./includes/mysql/banco.php";
-        require_once "./includes/functions/thumb.php";
-        require_once "./includes/functions/messages.php";
+        session_start();
+        if (isset($_SESSION["userID"])){
+            require_once "./includes/mysql/banco.php";
+            require_once "./includes/functions/cover.php";
+            require_once "./includes/functions/messages.php";
 
-        $searchValue = $_GET["filter"] ?? ""; // Recebe o valor passado na caixa de pesquisa.
-        $order = $_GET["order"] ?? ""; // Recebe o valor do parâmetro "order" passado por GET.
+            $searchValue = $_GET["filter"] ?? ""; // Recebe o valor passado na caixa de pesquisa.
+            $order = $_GET["order"] ?? ""; // Recebe o valor do parâmetro "order" passado por GET.
+        }else {
+            header("location: ./pages/login.php");
+        }        
     ?>
     <header>
         <h1>Melhores jogos</h1>
@@ -80,7 +85,7 @@
 
             }else {
                 while ($reg = $jogo->fetch_object()){ // Enquanto retonar um novo objeto com os registro da consulta
-                    $capa = thumb(".", $reg->capa);
+                    $capa = cover(".", $reg->capa);
                     echo "
                         <a href='./pages/infoJogo.php?id=$reg->id' target='_self'>
                             <div class='jogo'>

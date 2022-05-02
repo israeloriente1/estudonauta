@@ -11,15 +11,20 @@
 <body>
     <main>
         <?php
+            session_start();
+            if (!isset($_SESSION["userID"])){
+                header("location: ./login.php");
+            }
+            
             require_once "../includes/mysql/banco.php";
-            require_once "../includes/functions/thumb.php";
+            require_once "../includes/functions/cover.php";
             require_once "../includes/functions/back.php";
             require_once "../includes/functions/messages.php";
             
             $idJogo = $_GET["id"] ?? 0; // id do jogo passado pelo por parâmetro GET
-            $backButton = backButton();
+            $backButton = backButton(); // Recebera uma tag HTML que irá conter o símbolo do botão "voltar".
 
-            if ($idJogo <= 0){ // id inexistente
+            if (!is_numeric($idJogo) || $idJogo <= 0){ // id inexistente
                 echo "
                         <div class='jogo'>
                             <p>Ops! Parece que tivemos um problema, tente novamente mais tarde !</p>
@@ -38,7 +43,7 @@
                         ";
                 }else {
                     $jogoInfo = $jogoInfo->fetch_object();
-                    $capa = thumb("..", $jogoInfo->capa);                
+                    $capa = cover("..", $jogoInfo->capa);                
                     
                     echo "
                             <div class='jogo'>

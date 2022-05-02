@@ -4,7 +4,7 @@ USE `estudonauta`;
 --
 -- Host: 127.0.0.1    Database: estudonauta
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.22-MariaDB
+-- Server version	5.5.5-10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -128,12 +128,13 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `senha` varchar(70) NOT NULL,
+  `senha` varchar(255) NOT NULL,
   `tipo` enum('editor','adm') DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,6 +143,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (2,'Israel de Deus Nogueira do Oriente','israeloriente1@hotmail.com','$2y$10$qmMbZ.VJWVU9BdQBznukSuZ7oTlfVWAxZvxXExiTxzKyaF6GgvPbu','adm'),(3,'Nevilles Oriente Souza','nevillesoriente1@hotmail.com','$2y$13$FpwLPpEkfNoG5pdV.CEdJ.xQRSBOAhXdvbOLo..tKPgJNM2x9LT2y','editor');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,4 +200,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-10 16:11:04
+-- Dump completed on 2022-05-01 22:04:54

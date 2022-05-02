@@ -12,6 +12,8 @@
 </head>
 <body>
     <!-- Arquivo usado apenas para teste e exemplos para outras páginas -->
-    
+    <?php 
+        echo password_hash("Nevilles1526", PASSWORD_DEFAULT, ["cost" => 13]);
+    ?>
 </body>
 </html>
